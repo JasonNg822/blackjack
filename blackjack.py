@@ -1,8 +1,8 @@
 # 扑克牌21点
 # 一位庄家，最多6位玩家
 # Ace 算10点吗？
-
-# 多位“庄家”
+# 15点可以不玩吗？
+# 有玩pair吗？
 
 
 import random
@@ -34,12 +34,14 @@ while True: # 玩家15点可以不玩吗？
 
 while True: # 两张一样的算赢吗？
     pairs = input("Is that get pair at the first 2 card win double? ").strip().upper()
-    if pairs == "YES" or pairs == "Y" or pairs == "NO" or pairs == "N":
+    if pairs in ("YES", "Y", "NO", "N"):
         break
     else:
         print("Please key in 'YES' or 'Y' or 'NO' or 'N'")
 
 # hcard = hold card
+# pairp = pair player
+# ftnp = fifteen player
 host_hcard = set()
 player1_hcard = set()
 player2_hcard = set()
@@ -70,36 +72,36 @@ card_value = {
 def ftn(card, pn):
         if ft == "HOST" and (len(host_hcard) == 2 and calculate(host_hcard) == 15):
             wp = input("Host get 15, want play or not? ").strip().upper()
-            if wp == "NO" or wp == "N":
+            if wp ("NO", "N"):
                 print("Host get 15 and choose to don't play")
                 print("Game End")
                 ftnp.add("Host")
                 return 1
-            elif wp == "YES" or wp == "Y":
+            elif wp in ("YES", "Y"):
                 return 0
             else:
                 print("Please key in 'YES' or 'Y' or 'NO' 'N'")
         elif ft == "PLAYER AND HOST" and (len(card) == 2 and calculate(card) == 15):
             wp = input(f"{pn} get 15, want play or not? ").strip().upper()
-            if (wp == "NO" or wp == "N") and pn == "Host":
+            if (wp in ("NO" or wp == "N")) and pn == "Host":
                 print("Host get 15 and choose to don't play")
                 print("Game End")
                 ftnp.add("Host")
                 return 1
-            elif wp == "NO" or wp == "N":
+            elif wp in ("NO", "N"):
                 print(f"{pn} get 15 and choose to don't play")
                 ftnp.add(pn)
                 return 0
-            elif wp == "YES" or wp == "Y":
+            elif wp in ("YES", "Y"):
                 return 0
             else:
                 print("Please key in 'YES' or 'Y' or 'NO' 'N'")
         elif ft == "PLAYER" and (len(card) == 2 and calculate(card) == 15):
             wp = input(f"{pn} get 15, want play or not? ").strip().upper()
-            if wp == "NO" or wp == "N":
+            if wp in ("NO", "N"):
                 print(f"{pn} get 15 and choose to don't play")
                 ftnp.add(pn)
-            elif wp == "YES" or wp == "Y":
+            elif wp in ("YES", "Y"):
                 return 0
             else:
                 print("Please key in 'YES' or 'Y' or 'NO' 'N'")
@@ -109,7 +111,7 @@ def pair(card, pn):
     for pa in range(1):
         if "Host" in ftnp:
             break
-        if pairs == "YES" or pairs == "Y":
+        if pairs in ("YES", "Y"):
             if len(card) == 2 and card[0][-1] == card[1][-1]:
                 pairp.add(pn)
                 return 1
@@ -347,6 +349,7 @@ def calculate(card):
 
 
 def gp():
+    # gp = get point
     for p in range(np + 1): # np = number of player
         if p == np:
             p = host_hcard
